@@ -87,30 +87,25 @@
         <div class="row">
             <div class="col-md-7">
             
-              <table class="table table-hover">
+              <table id="clientsTable" class="table table-hover">
                 <thead>
                   <tr>
-                    <th>Firstname</th>
-                    <th>Lastname</th>
-                    <th>Email</th>
+                    <th>#</th>
+                    <th>ID Number</th>
+                    <th>Title</th>
+                    <th>Surname</th>
+                    <th>Name</th>
+                    <th>Language</th>
                   </tr>
                 </thead>
                 <tbody>
+
                   <tr>
                     <td>John</td>
                     <td>Doe</td>
                     <td>john@example.com</td>
                   </tr>
-                  <tr>
-                    <td>Mary</td>
-                    <td>Moe</td>
-                    <td>mary@example.com</td>
-                  </tr>
-                  <tr>
-                    <td>July</td>
-                    <td>Dooley</td>
-                    <td>july@example.com</td>
-                  </tr>
+
                 </tbody>
               </table>
 
@@ -148,14 +143,18 @@
 
             alert('Calling client list api ...');
             
-            this.settings = {
+            var ajaxCallSettings = 
+            {
                 url: "http://41.193.214.130:2511/tidemodev/clt_list",
                 type: "get",
-                dataType: "json"
-            };
+                dataType: "json",
+                success: displayClients,
+                error: displayError
+            }; 
             
-            $.ajax(this.settings)
+            $.ajax(ajaxCallSettings);
 
+/*
             .success(function (data) {
                 alert(data.clients.length + ' clients returned from api.')
             })
@@ -163,12 +162,34 @@
             .error(function (jqXmlHttpRequest) {
                 alert('Error encountered: ' + jqXmlHttpRequest.responseText)
             });
-
+*/
 
         });
 
 
+
+        // Displays the specified list of JSON serialised clients:
+        //
+        function displayClients( clientsJson ) {
+
+
+            alert(clientsJson);
+
+        }
+
+
+
+        // Displays the specified list of JSON serialised clients:
+        //
+        function displayError( jqXmlHttpRequest ) {
+        
+            alert('Error encountered: ' + jqXmlHttpRequest.responseText)
+        
+        }
+
+
     </script>
+
 </body>
 
 </html>
