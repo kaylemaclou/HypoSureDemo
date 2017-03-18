@@ -162,48 +162,62 @@ ClientRestApiDemo.html
         $(document).ready(function () {
 
             alert('Calling client list api ...');
-            
+           
+
+            // Specify the settings of the AJAX call to the Clients REST API:
+
             var ajaxCallSettings = 
             {
-                url: "http://41.193.214.130:2511/tidemodev/clt_list",
-                type: "get",
-                dataType: "json",
-                success: displayClients,
-                error: displayError
+            
+                url: "http://41.193.214.130:2511/tidemodev/clt_list", // specify the URL of the call,
+            
+                type: "get",  // specify "get" as the type of HTTP request,
+            
+                dataType: "json",  // indicate that JSON data is to be returned,
+            
+                success: displayClients,  // specify the callback function for a successfull call,
+            
+                error: displayErrorMessage  // specify the callback function for a unsuccessfull call 
+            
             }; 
             
+
+            // Perform the AJAX call to the Clients REST API, using the above settings, 
             $.ajax(ajaxCallSettings);
 
-/*
-            .success(function (data) {
-                alert(data.clients.length + ' clients returned from api.')
-            })
-
-            .error(function (jqXmlHttpRequest) {
-                alert('Error encountered: ' + jqXmlHttpRequest.responseText)
-            });
-*/
 
         });
 
 
 
-        // Displays the specified list of JSON serialised clients:
+        // Displays the list of clients (returned from the call to the REST API),
+        // in the clients HTML table:
         //
-        function displayClients( clientsJson ) {
+        function displayClients( data ) {
 
 
-            alert(clientsJson);
+            foreach (var client in data.clients) {
+
+
+
+            }
 
         }
 
 
 
-        // Displays the specified list of JSON serialised clients:
+        // Displays the error message returned from the jQuery AJAX call to 
+        // the "Clients" REST API:
         //
-        function displayError( jqXmlHttpRequest ) {
+        function displayErrorMessage( jqXmlHttpRequest ) {
         
-            alert('Error encountered: ' + jqXmlHttpRequest.responseText)
+            // Concatenate the error message to be displayed,
+            var errorMessage = '';
+            errorMessage += 'Unable to obtain the list of clients. ';
+            errorMessage += jqXmlHttpRequest.responseText;
+
+            // display the concatenated erorr message.
+            alert(errorMessage);
         
         }
 
