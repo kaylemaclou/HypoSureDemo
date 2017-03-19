@@ -1,22 +1,3 @@
-ClientRestApiDemo.html
-Today
-You edited an item
-Computer • 13:32
-HTML
-ClientRestApiDemo.html
-You edited an item
-Computer • 12:42
-HTML
-ClientRestApiDemo.html
-Yesterday
-You edited an item
-Computer • Fri 15:33
-HTML
-ClientRestApiDemo.html
-You uploaded an item
-Computer • Fri 12:21
-HTML
-ClientRestApiDemo.html
 
 <!DOCTYPE html>
 <html lang="en">
@@ -29,7 +10,7 @@ ClientRestApiDemo.html
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>HypoSure Demo - Modern Business Template</title>
+    <title>HypoSure Demo</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -175,9 +156,9 @@ ClientRestApiDemo.html
             
                 dataType: "json",  // indicate that JSON data is to be returned,
             
-                success: displayClients,  // specify the callback function for a successfull call,
+                success: displayClients,  // specify the callback function inin the event of a successfull call,
             
-                error: displayErrorMessage  // specify the callback function for a unsuccessfull call 
+                error: displayErrorMessage  // specify the callback function in the event of an unsuccessfull call.
             
             }; 
             
@@ -195,13 +176,11 @@ ClientRestApiDemo.html
         //
         function displayClients( data ) {
 
-
+alert(2);
+/*
             foreach (var client in data.clients) {
-
-
-
-            }
-
+          }
+*/
         }
 
 
