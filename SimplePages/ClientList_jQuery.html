@@ -144,61 +144,64 @@
     <script type="text/javascript">
 
 
-        $(document).ready(function () {        
 
-            // Specify the settings of the AJAX call to the Clients REST API:
+      // Obtain the list of clients, once the HTML document is ready.
+      $(document).ready( getClientsFromRestApi );
 
+
+
+
+      // Obtains the (JSON serialized) list of clients, from the relevant REST API: 
+      //
+      function getClientsFromRestApi() {
+
+            // Specify the AJAX call settings of the clients REST API :
             var ajaxCallSettings = 
-            {
-            
-                url: 'http://41.193.214.130:2511/tidemodev/clt_list', // specify the URL of the call,
-            
-                type: 'get',  // specify "get" as the type of HTTP request,
-            
-                dataType: 'json',  // indicate that JSON data is to be returned,
-            
-                success: displayClientsInTable,  // specify the callback function for a successfull call,
-            
-                error: displayErrorMessage  // specify the callback function for an unsuccessfull call.
-            
-            }; 
-            
+                  {
+                      url: 'http://41.193.214.130:2511/tidemodev/clt_list', // specify the URL to be called,
 
-            // Perform the AJAX call to the Clients REST API, using the above settings, 
+                      type: 'get',  // specify "get" as the type of HTTP request,
+
+                      dataType: 'json',  // indicate that JSON data is to be returned,
+
+                      success: displayClientsInTable,  // specify the callback function of a successfull call,
+
+                      error: displayErrorMessage  // specify the callback function of an unsuccessfull call.
+                  }; 
+
+            // Perform the actual AJAX call to the clients REST API, using the above settings. 
             $.ajax(ajaxCallSettings);
 
-
-        });
-
+      }
 
 
 
-        // Displays the list of clients (returned from the call to the REST API),
-        // in the clients HTML table:
-        //
-        function displayClientsInTable( data ) {
+
+      // Displays the list of clients (from the REST API), in the clients HTML table:
+      //
+      function displayClientsInTable( data ) {
 
             // Construct the HTML Table rows, for the clients returned from the REST API,
-            var clientRowsHtml = constructHtmlTableRows( data.clients );
+            var clientRowsHtml = constructClientRowsHtml( data.clients );
 
             // add the constructed HTML client rows , to the clients HTML Table:
              $('#clientsTable > TBODY').html(clientRowsHtml);
 
-        }
+      }
 
 
 
 
-        // Constructs the HTML Table rows, for the specified clients (array):
-        //
-        function constructHtmlTableRows( clients ) {
+      // Construct the client HTML table rows, for the specified clients array,
+      //
+      function constructClientRowsHtml( clients ) {
 
             var clientRowsHtml = '';
 
             // For each client in the clients array:
             clients.forEach( function( client ) {
 
-                // construct an HTML Table row, for the current client: 
+                // construct an HTML table row, for the current client: 
                 clientRowsHtml += '<TR>';
                 clientRowsHtml += '<TD>' + client.client + '</TD>';
                 clientRowsHtml += '<TD>' + client.clientIDNo + '</TD>';
@@ -210,28 +213,28 @@
 
             } );
 
-            // return the constructed HTML Table rows.
+            // return the constructed HTML table rows.
             return clientRowsHtml;
 
-        }
+      }
 
 
 
 
-        // Displays the error message returned from the unsuccessful AJAX call to 
-        // the clients REST API:
-        //
-        function displayErrorMessage( jqXmlHttpRequest ) {
-        
+      // Displays the error message returned from an unsuccessful AJAX call to 
+      // the clients REST API:
+      //
+      function displayErrorMessage( xmlHttpRequest, status, error ) {
+
             // Concatenate the error message to be displayed,
             var errorMessage = '';
             errorMessage += 'Unable to obtain the list of clients. ';
-            errorMessage += jqXmlHttpRequest.responseText;
+            errorMessage += xmlHttpRequest.responseText;
 
             // display the concatenated error message.
-            alert(errorMessage);
-        
-        }
+            $('#clientsTable > TBODY TD').html(errorMessage);
+
+      }
 
 
     </script>
