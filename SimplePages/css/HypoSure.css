@@ -1,0 +1,24 @@
+
+.businessObjectList 
+{
+	border: 1px solid #bbb;
+	border-radius: 4px;
+	box-shadow: 6px 6px 2px #ccc;
+}
+
+
+.businessObjectList > thead 
+{
+	background: #eeeeee;
+}
+
+
+.businessObjectList span
+{
+	padding-left: 8em;
+	color: #aaa; 
+	font-family: Helvetica, Arial; 
+	font-size: 10pt;
+	font-weight: bold;
+	font-style: italic;
+}
