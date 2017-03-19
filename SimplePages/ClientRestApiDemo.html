@@ -93,19 +93,14 @@
                   <tr>
                     <th>#</th>
                     <th>ID Number</th>
-                    <th>Title</th>
-                    <th>Surname</th>
                     <th>Name</th>
+                    <th>Surname</th>
+                    <th>Title</th>
                     <th>Language</th>
                   </tr>
                 </thead>
                 <tbody>
 
-                  <tr>
-                    <td>John</td>
-                    <td>Doe</td>
-                    <td>john@example.com</td>
-                  </tr>
 
                 </tbody>
               </table>
@@ -150,15 +145,15 @@
             var ajaxCallSettings = 
             {
             
-                url: "http://41.193.214.130:2511/tidemodev/clt_list", // specify the URL of the call,
+                url: 'http://41.193.214.130:2511/tidemodev/clt_list', // specify the URL of the call,
             
-                type: "get",  // specify "get" as the type of HTTP request,
+                type: 'get',  // specify "get" as the type of HTTP request,
             
-                dataType: "json",  // indicate that JSON data is to be returned,
+                dataType: 'json',  // indicate that JSON data is to be returned,
             
-                success: displayClients,  // specify the callback function inin the event of a successfull call,
+                success: displayClientsInTable,  // specify the callback function for a successfull call,
             
-                error: displayErrorMessage  // specify the callback function in the event of an unsuccessfull call.
+                error: displayErrorMessage  // specify the callback function for an unsuccessfull call.
             
             }; 
             
@@ -171,22 +166,51 @@
 
 
 
+
         // Displays the list of clients (returned from the call to the REST API),
         // in the clients HTML table:
         //
-        function displayClients( data ) {
+        function displayClientsInTable( data ) {
 
-alert(2);
-/*
-            foreach (var client in data.clients) {
-          }
-*/
+            alert(2);
+
+            data.clients.forEach( addClientToTable );
+
         }
 
 
 
-        // Displays the error message returned from the jQuery AJAX call to 
-        // the "Clients" REST API:
+
+        // Adds a row to the clients HTML table, for the specified client:
+        //
+        function addClientToTable( client ) {
+
+            // Construct the HTML for the new client row:
+
+            var clientRowHtml = '';
+
+            clientRowHtml += '<TR>';
+
+            clientRowHtml += '<TD>' + client.client + '</TD>';
+            clientRowHtml += '<TD>' + client.clientIDNo + '</TD>';
+            clientRowHtml += '<TD>' + client.clientName + '</TD>';
+            clientRowHtml += '<TD>' + client.clientSurname + '</TD>';
+            clientRowHtml += '<TD>' + client.clientTitle + '</TD>';
+            clientRowHtml += '<TD>' + client.clientLanguage + '</TD>';
+
+            clientRowHtml += '</TR>';
+            
+            // Append the client row's HTML, to the clients table's body:
+
+             $('#clientsTable > TBODY').append(clientRowHtml);
+
+        }
+
+
+
+
+        // Displays the error message returned from the unsuccessful AJAX call to 
+        // the clients REST API:
         //
         function displayErrorMessage( jqXmlHttpRequest ) {
         
@@ -195,7 +219,7 @@ alert(2);
             errorMessage += 'Unable to obtain the list of clients. ';
             errorMessage += jqXmlHttpRequest.responseText;
 
-            // display the concatenated erorr message.
+            // display the concatenated error message.
             alert(errorMessage);
         
         }
