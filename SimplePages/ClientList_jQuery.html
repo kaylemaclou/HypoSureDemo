@@ -178,35 +178,40 @@
         //
         function displayClientsInTable( data ) {
 
-            data.clients.forEach( addClientToTable );
+            // Construct the HTML Table rows, for the clients returned from the REST API,
+            var clientRowsHtml = constructHtmlTableRows( data.clients );
+
+            // add the constructed HTML client rows , to the clients HTML Table:
+             $('#clientsTable > TBODY').html(clientRowsHtml);
 
         }
 
 
 
 
-        // Adds a row to the clients HTML table, for the specified client:
+        // Constructs the HTML Table rows, for the specified clients (array):
         //
-        function addClientToTable( client ) {
+        function constructHtmlTableRows( clients ) {
 
-            // Construct the HTML for the new client row:
+            var clientRowsHtml = '';
 
-            var clientRowHtml = '';
+            // For each client in the clients array:
+            clients.forEach( function( client ) {
 
-            clientRowHtml += '<TR>';
+                // construct an HTML Table row, for the current client: 
+                clientRowsHtml += '<TR>';
+                clientRowsHtml += '<TD>' + client.client + '</TD>';
+                clientRowsHtml += '<TD>' + client.clientIDNo + '</TD>';
+                clientRowsHtml += '<TD>' + client.clientName + '</TD>';
+                clientRowsHtml += '<TD>' + client.clientSurname + '</TD>';
+                clientRowsHtml += '<TD>' + client.clientTitle + '</TD>';
+                clientRowsHtml += '<TD>' + client.clientLanguage + '</TD>';
+                clientRowsHtml += '</TR>';
 
-            clientRowHtml += '<TD>' + client.client + '</TD>';
-            clientRowHtml += '<TD>' + client.clientIDNo + '</TD>';
-            clientRowHtml += '<TD>' + client.clientName + '</TD>';
-            clientRowHtml += '<TD>' + client.clientSurname + '</TD>';
-            clientRowHtml += '<TD>' + client.clientTitle + '</TD>';
-            clientRowHtml += '<TD>' + client.clientLanguage + '</TD>';
+            } );
 
-            clientRowHtml += '</TR>';
-            
-            // Append the client row's HTML, to the clients table's body:
-
-             $('#clientsTable > TBODY').append(clientRowHtml);
+            // return the constructed HTML Table rows.
+            return clientRowsHtml;
 
         }
 
