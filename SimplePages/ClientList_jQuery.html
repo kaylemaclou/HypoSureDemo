@@ -128,25 +128,37 @@
                     <p>Copyright &copy; Your Website 2014</p>
                 </div>
             </div>
-        </footer>
+    
+      </footer>
 
     </div>
-    <!-- /.container -->
+
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
+
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 
 
 
-    <script type="text/javascript">
+    <script type="text/javascript"> 
 
 
-      // Obtain the list of clients, once the HTML document is ready.
+    /*  
+     *  This simple example, requests a list of clients, from the clients
+     *  REST API and then displays this list in an HTML table.
+     *
+     *  The URL of the clients REST API is:
+     *    http://41.193.214.130:2511/tidemodev/clt_list
+     *
+     */
+
+
+
+      // Obtain the list of clients, once the HTML document has been loaded.
       $(document).ready( getClientsFromRestApi );
-
 
 
 
@@ -175,7 +187,6 @@
 
 
 
-
       // Displays the list of clients (from the REST API), in the clients HTML table:
       //
       function displayClientsInTable( data ) {
@@ -187,7 +198,6 @@
              $('#clientsTable > TBODY').html(clientRowsHtml);
 
       }
-
 
 
 
@@ -216,7 +226,6 @@
             return clientRowsHtml;
 
       }
-
 
 
 
